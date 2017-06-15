@@ -1,0 +1,30 @@
+group 'ru.kest'
+version '1.0-SNAPSHOT'
+
+subprojects { p ->
+    p.buildscript {
+        ext.kotlin_version = "1.1.2-2"
+
+        repositories {
+            mavenLocal()
+            jcenter()
+            maven { url "http://dl.bintray.com/kotlin/kotlin-eap" }
+        }
+        
+        dependencies {
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+            classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.19"
+        }
+    }
+}
+
+subprojects {
+    ext.kotlin_version = "1.1.1"
+    ext.html_version = "0.6.2"
+
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven { url "http://dl.bintray.com/kotlin/kotlinx.html" }
+    }
+}

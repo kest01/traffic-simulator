@@ -1,0 +1,84 @@
+group 'ru.kest'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin2js'
+apply plugin: 'org.jetbrains.kotlin.frontend'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+    compile("org.jetbrains.kotlinx:kotlinx-html-js:$html_version")
+}
+
+kotlinFrontend {
+    sourceMaps = false
+
+    npm {
+        replaceVersion("kotlinx-html-js", "1.1.0")
+        replaceVersion("kotlinx-html-shared", "1.1.0")
+        replaceVersion("kotlin-js-library", "1.1.0")
+
+        dependency("react")
+        dependency("react-dom")
+        dependency("react-router")
+        dependency("jquery")
+        dependency("react-markdown")
+
+        devDependency("css-loader")
+        devDependency("style-loader")
+        devDependency("babel-loader")
+        devDependency("babel-core")
+        devDependency("karma")
+    }
+
+    webpackBundle {
+        publicPath = "/frontend/"
+//        contentPath = file('src/main/resources')
+        port = 3000
+    }
+}
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.outputFile = "$project.buildDir.path/js/${project.name}.js"
+    kotlinOptions.sourceMap = true
+    kotlinOptions.moduleKind = 'commonjs'
+    kotlinOptions.main = "call"
+}
+
+sourceSets {
+    main.kotlin.srcDirs += "src/main/kotlin"
+    main.resources.srcDirs += "src/main/resources"
+    main.output.resourcesDir = "build/js/resources"
+    test.kotlin.srcDirs += "src/test/kotlin"
+    test.resources.srcDirs += "src/test/resources"
+}
+
+task copyResources(type: Copy) {
+    from sourceSets.main.resources.srcDirs
+//    into sourceSets.main.output.resourcesDir
+    into file(buildDir.path + "/js")
+}
+
+task('copyTask', type: Copy) {
+    from(file("src/main/web"))
+//    from(sourceSets.main.resources.srcDirs)
+    into(file(buildDir.path))
+}
+
+
+afterEvaluate {
+    tasks.getByName("webpack-bundle") { dependsOn(copyResources, copyTask) }
+    tasks.getByName("webpack-run") { dependsOn(copyResources, copyTask) }
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
