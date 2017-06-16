@@ -2,29 +2,33 @@ package ru.kest.traffic
 
 import kotlinx.html.div
 import kotlinx.html.h1
-import react.RState
 import react.ReactComponentNoProps
+import react.ReactComponentNoState
 import react.ReactComponentSpec
 import react.dom.ReactDOMBuilder
 import react.dom.ReactDOMComponent
 
-class Application : ReactDOMComponent<ReactComponentNoProps, ApplicationPageState>() {
-    companion object : ReactComponentSpec<Application, ReactComponentNoProps, ApplicationPageState>
+/**
+ * Base Application component
+ *
+ * Created by KKharitonov on 16.06.2017.
+ */
+class Application : ReactDOMComponent<ReactComponentNoProps, ReactComponentNoState>() {
+    companion object : ReactComponentSpec<Application, ReactComponentNoProps, ReactComponentNoState>
 
     init {
-        state = ApplicationPageState("Hello world")
+        state = ReactComponentNoState()
     }
+
 
     override fun ReactDOMBuilder.render() {
         div {
             h1 { +"Traffic simulator" }
             div("road-area") {
-                for(i in ROAD_MAP.indices) run {
+                for(x in ROAD_MAP.indices) run {
                     div(classes = "road-line") {
-                        for (j in ROAD_MAP[i].indices) {
-                            div(classes = "road-block") {
-                                + getRoadChar(ru.kest.traffic.ROAD_MAP[i][j])
-                            }
+                        for (y in ROAD_MAP[x].indices) {
+                            RoadCell(RoadCell.RoadCellProps(x, y))
                         }
                     }
                 }
@@ -33,6 +37,5 @@ class Application : ReactDOMComponent<ReactComponentNoProps, ApplicationPageStat
     }
 }
 
-fun getRoadChar(c : Char) = if (c == ' ') " " else c.toString()
 
-class ApplicationPageState(var message: String) : RState
+
