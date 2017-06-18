@@ -3,6 +3,7 @@ package ru.kest.traffic
 import kotlinx.html.div
 import react.dom.ReactDOM
 import react.dom.render
+import ru.kest.traffic.component.Application
 import kotlin.browser.document
 
 //arrayOf('⬆','⬇','⬅','⮕','⬈','⬊','⬉','⬋'),

@@ -1,27 +1,30 @@
-
-h1 {
-    text-align: center;
-}
-
 #content {
     padding: 0;
     font-family: Georgia, "Cambria", serif;
 }
 
-.road-area {
+h1 {
+    text-align: center;
+}
+
+.street-area {
     display: table;
     background-color: bisque;
     margin: auto;
     padding: 50px;
 }
 
-.road-line {
+.street-line {
 }
 
-.road-cell {
+.street-block {
     display: inline-block;
     width: 30px;
     height: 30px;
     border: 1px solid;
     vertical-align:top;
+}
+
+.street {
+    background-color: darkgrey;
 }

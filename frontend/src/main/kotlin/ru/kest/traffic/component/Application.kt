@@ -1,4 +1,4 @@
-package ru.kest.traffic
+package ru.kest.traffic.component
 
 import kotlinx.html.div
 import kotlinx.html.h1
@@ -7,6 +7,8 @@ import react.ReactComponentNoState
 import react.ReactComponentSpec
 import react.dom.ReactDOMBuilder
 import react.dom.ReactDOMComponent
+import ru.kest.traffic.ROAD_MAP
+import ru.kest.traffic.entity.StreetBlock
 
 /**
  * Base Application component
@@ -24,11 +26,11 @@ class Application : ReactDOMComponent<ReactComponentNoProps, ReactComponentNoSta
     override fun ReactDOMBuilder.render() {
         div {
             h1 { +"Traffic simulator" }
-            div("road-area") {
+            div("street-area") {
                 for(x in ROAD_MAP.indices) run {
-                    div(classes = "road-line") {
+                    div(classes = "street-line") {
                         for (y in ROAD_MAP[x].indices) {
-                            RoadCell(RoadCell.RoadCellProps(x, y))
+                            StreetBlockComponent(StreetBlock(x, y))
                         }
                     }
                 }
