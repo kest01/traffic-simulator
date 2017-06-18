@@ -18,7 +18,7 @@ enum class StreetBlockType(val c : Char) {
 
 }
 
-fun getStreetBlockTypeByChar(c: Char) : StreetBlockType{
+fun getStreetBlockTypeByChar(c: Char) : StreetBlockType {
     enumValues<StreetBlockType>().forEach {
         if (it.c == c) return it
     }

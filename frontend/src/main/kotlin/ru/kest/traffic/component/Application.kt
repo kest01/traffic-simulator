@@ -2,9 +2,7 @@ package ru.kest.traffic.component
 
 import kotlinx.html.div
 import kotlinx.html.h1
-import react.ReactComponentNoProps
-import react.ReactComponentNoState
-import react.ReactComponentSpec
+import react.*
 import react.dom.ReactDOMBuilder
 import react.dom.ReactDOMComponent
 import ru.kest.traffic.ROAD_MAP
@@ -35,6 +33,7 @@ class Application : ReactDOMComponent<ReactComponentNoProps, ReactComponentNoSta
                     }
                 }
             }
+            div("test-content")
         }
     }
 }
