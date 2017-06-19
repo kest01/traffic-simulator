@@ -32,15 +32,88 @@ h1 {
 .road-block {
     background-color: darkgrey;
     box-sizing: border-box;
+}
+
+.road-block-wayside-right {
+    border-right: 3px solid black;
+}
+
+.road-block-wayside-left {
     border-left: 3px solid black;
+}
+
+.road-block-wayside-top {
+    border-top: 3px solid black;
+}
+
+.road-block-wayside-bottom {
+    border-bottom: 3px solid black;
+}
+
+.road-block-line-right {
     border-right: 1px dashed white;
 }
 
-.road-block-rotate-180 {
-    transform: rotate(180deg);
-    border-right: none;
-
+.road-block-line-left {
+    border-left: 1px dashed white;
 }
-.test-content {
 
+.road-block-line-top {
+    border-top: 1px dashed white;
+}
+
+.road-block-line-bottom {
+    border-bottom: 1px dashed white;
+}
+
+.road-block-angle-up-left {
+    background:
+            linear-gradient(to bottom left,
+            darkgray 0%,
+            darkgray calc(50% - 2px),
+            black 50%,
+            darkgreen calc(50% + 1px),
+            darkgreen 100%);
+}
+
+.road-block-angle-up-right {
+    background:
+            linear-gradient(to top left,
+            darkgray 0%,
+            darkgray calc(50% - 2px),
+            black 50%,
+            darkgreen calc(50% + 1px),
+            darkgreen 100%);
+}
+
+.road-block-angle-down-left {
+    background:
+            linear-gradient(to bottom right,
+            darkgray 0%,
+            darkgray calc(50% - 2px),
+            black 50%,
+            darkgreen calc(50% + 1px),
+            darkgreen 100%);
+}
+
+.road-block-angle-down-right {
+    background:
+            linear-gradient(to top right,
+            darkgray 0%,
+            darkgray calc(50% - 2px),
+            black 50%,
+            darkgreen calc(50% + 1px),
+            darkgreen 100%);
+}
+
+.test-content {
+    width: 20px;
+    height: 20px;
+    background:
+            linear-gradient(to top right,
+            darkgreen 0%,
+            rgba(0,0,0,0) calc(50% - 2px),
+            rgba(0,0,0,1) 50%,
+            rgba(0,0,0,0) calc(50% + 0.8px),
+            rgba(0,0,0,0) 100%);
 }

@@ -4,25 +4,8 @@ import kotlinx.html.div
 import react.dom.ReactDOM
 import react.dom.render
 import ru.kest.traffic.component.Application
+import ru.kest.traffic.entity.RoadMap
 import kotlin.browser.document
-
-//arrayOf('⬆','⬇','⬅','⮕','⬈','⬊','⬉','⬋'),
-
-val ROAD_MAP = arrayOf(
-        arrayOf(' ',' ','⮕','⮕','⮕','⮕','⮕','⬊',' ' , ' '),
-        arrayOf(' ','⬈','⮕','⮕','⮕','⮕','⮕','⬊','⬊',' '),
-        arrayOf('⬈','⬈',' ', ' ', ' ', ' ',' ', ' ','⬇','⬇'),
-        arrayOf('⬆','⬆',' ' , ' ', ' ', ' ',' ', ' ', '⬇','⬇'),
-        arrayOf('⬆','⬆',' ' , ' ', ' ', ' ',' ', ' ', '⬇','⬇'),
-        arrayOf('⬆','⬆',' ' , ' ', ' ', ' ',' ', ' ', '⬇','⬇'),
-        arrayOf('⬆','⬆',' ' , ' ', ' ', ' ',' ', ' ', '⬇','⬇'),
-        arrayOf('⬆','⬆',' ' , ' ', ' ', ' ',' ', ' ','⬋','⬋'),
-        arrayOf(' ','⬉','⬉','⬅','⬅','⬅','⬅','⬅','⬋',' '),
-        arrayOf(' ',' ','⬉','⬅','⬅','⬅','⬅','⬅',' ', ' ')
-)
-
-val MAP_HEIGHT = ROAD_MAP.size
-val MAP_WEIGHT = ROAD_MAP[0].size
 
 
 fun main(args: Array<String>) {
@@ -30,7 +13,7 @@ fun main(args: Array<String>) {
 
     ReactDOM.render(document.getElementById("content")) {
         div {
-            Application {}
+            Application(Application.ApplicationProps(RoadMap()))
         }
     }
 }
