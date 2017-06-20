@@ -1,8 +1,7 @@
 package ru.kest.traffic.component
 
 import kotlinx.html.div
-import react.ReactComponentNoState
-import react.ReactComponentSpec
+import react.*
 import react.dom.ReactDOMBuilder
 import react.dom.ReactDOMComponent
 import ru.kest.traffic.entity.StreetBlock
@@ -13,15 +12,15 @@ import ru.kest.traffic.entity.StreetBlockType.*
  *
  * Created by KKharitonov on 16.06.2017.
  */
-class StreetBlockComponent : ReactDOMComponent<StreetBlock, ReactComponentNoState>() {
-    companion object : ReactComponentSpec<StreetBlockComponent, StreetBlock, ReactComponentNoState>
+class StreetBlockComponent : ReactDOMComponent<StreetBlockComponent.StreetBlockProps, ReactComponentNoState>() {
+    companion object : ReactComponentSpec<StreetBlockComponent, StreetBlockProps, ReactComponentNoState>
 
     init {
         state = ReactComponentNoState()
     }
 
     override fun ReactDOMBuilder.render() {
-        val blockTypeClass = classByBlockType(props)
+        val blockTypeClass = classByBlockType(props.block)
         div(classes = "street-block street $blockTypeClass") {
 //            + ROAD_MAP[props.x][props.y].toString()
 /*            if (props != EMPTY) {
@@ -82,19 +81,19 @@ class StreetBlockComponent : ReactDOMComponent<StreetBlock, ReactComponentNoStat
             } else if (block.bottomNeighbor == EMPTY) {
                 classes.add("road-block-line-top")
             }
-/*
-        } else if (block.type == UPLEFT) {
-            if (block.leftNeighbor == EMPTY) {
-                classes.add("road-block-wayside-bottom")
-            }
-            if (block.topNeighbor == EMPTY) {
+        } else if (block.type == UPLEFT || block.type == UPRIGHT || block.type == DOWNLEFT || block.type == DOWNRIGHT) {
+            if (block.isTopNeighborsEmpty) {
                 classes.add("road-block-wayside-top")
-            } else if (block.bottomNeighbor == EMPTY) {
-                classes.add("road-block-line-top")
+            } else if (block.isBottomNeighborsEmpty) {
+                classes.add("road-block-wayside-bottom")
+            } else if (block.isLeftNeighborsEmpty) {
+                classes.add("road-block-wayside-left")
+            } else if (block.isRightNeighborsEmpty(false)) {
+                classes.add("road-block-wayside-right")
             }
-*/
         }
         return classes.joinToString(separator = " ")
     }
 
+    class StreetBlockProps(val block : StreetBlock) : RProps()
 }

@@ -1,4 +1,7 @@
-package ru.kest.traffic.entity
+package ru.kest.traffic.road
+
+import ru.kest.traffic.entity.StreetBlockType
+import ru.kest.traffic.entity.getStreetBlockTypeByChar
 
 /**
  * Represent map of environment

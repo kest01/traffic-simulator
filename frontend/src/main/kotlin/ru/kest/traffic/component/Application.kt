@@ -5,8 +5,8 @@ import kotlinx.html.h1
 import react.*
 import react.dom.ReactDOMBuilder
 import react.dom.ReactDOMComponent
-import ru.kest.traffic.entity.RoadMap
 import ru.kest.traffic.entity.StreetBlock
+import ru.kest.traffic.road.RoadMap
 
 /**
  * Base Application component
@@ -28,7 +28,7 @@ class Application : ReactDOMComponent<Application.ApplicationProps, ReactCompone
                 for(y in 0..props.map.ySize - 1) run {
                     div(classes = "street-line") {
                         for (x in 0..props.map.xSize - 1) {
-                            StreetBlockComponent(StreetBlock(props.map, x, y))
+                            StreetBlockComponent(StreetBlockComponent.StreetBlockProps(StreetBlock(props.map, x, y)))
                         }
                     }
                 }

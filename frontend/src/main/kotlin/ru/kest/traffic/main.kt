@@ -4,7 +4,7 @@ import kotlinx.html.div
 import react.dom.ReactDOM
 import react.dom.render
 import ru.kest.traffic.component.Application
-import ru.kest.traffic.entity.RoadMap
+import ru.kest.traffic.road.RoadMap
 import kotlin.browser.document
 
 
