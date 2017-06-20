@@ -21,76 +21,40 @@ class StreetBlockComponent : ReactDOMComponent<StreetBlockComponent.StreetBlockP
 
     override fun ReactDOMBuilder.render() {
         val blockTypeClass = classByBlockType(props.block)
-        div(classes = "street-block street $blockTypeClass") {
-//            + ROAD_MAP[props.x][props.y].toString()
-/*            if (props != EMPTY) {
-                div("road-block-roadside")
-                div("road-block-line")
-            }*/
-        }
+        div(classes = "street-block street $blockTypeClass")
     }
 
     private fun classByBlockType(block : StreetBlock) : String {
         if (block.type == EMPTY) {
-            if (block.topNeighbor == UPLEFT && block.rightNeighbor == UPLEFT) {
-                return "road-block-angle-up-left"
-            } else if (block.bottomNeighbor == UPRIGHT && block.rightNeighbor == UPRIGHT) {
-                return "road-block-angle-up-right"
-            } else if (block.bottomNeighbor == DOWNRIGHT && block.leftNeighbor == DOWNRIGHT) {
-                return "road-block-angle-down-right"
-            } else if (block.topNeighbor == DOWNLEFT && block.leftNeighbor == DOWNLEFT) {
-                return "road-block-angle-down-left"
-            }
-            return ""
+            return if (block.topNeighbor == UPLEFT && block.rightNeighbor == UPLEFT) "road-block-angle-up-left"
+                    else if (block.bottomNeighbor == UPRIGHT && block.rightNeighbor == UPRIGHT) "road-block-angle-up-right"
+                    else if (block.bottomNeighbor == DOWNRIGHT && block.leftNeighbor == DOWNRIGHT) "road-block-angle-down-right"
+                    else if (block.topNeighbor == DOWNLEFT && block.leftNeighbor == DOWNLEFT) "road-block-angle-down-left"
+                    else return ""
         }
         val classes = mutableListOf<String>("road-block")
 
         if (block.type == UP) {
-            if (block.leftNeighbor == EMPTY) {
-                classes.add("road-block-wayside-left")
-            }
-            if (block.rightNeighbor == EMPTY) {
-                classes.add("road-block-wayside-right")
-            } else if (block.leftNeighbor == EMPTY) {
-                classes.add("road-block-line-right")
-            }
+            if (block.leftNeighbor == EMPTY) classes.add("road-block-wayside-left")
+            if (block.rightNeighbor == EMPTY) classes.add("road-block-wayside-right")
+            else if (block.leftNeighbor == EMPTY) classes.add("road-block-line-right")
         } else if (block.type == DOWN) {
-            if (block.rightNeighbor == EMPTY) {
-                classes.add("road-block-wayside-right")
-            }
-            if (block.leftNeighbor == EMPTY) {
-                classes.add("road-block-wayside-left")
-            } else if (block.rightNeighbor == EMPTY) {
-                classes.add("road-block-line-left")
-            }
+            if (block.rightNeighbor == EMPTY) classes.add("road-block-wayside-right")
+            if (block.leftNeighbor == EMPTY) classes.add("road-block-wayside-left")
+            else if (block.rightNeighbor == EMPTY) classes.add("road-block-line-left")
         } else if (block.type == RIGHT) {
-            if (block.topNeighbor == EMPTY) {
-                classes.add("road-block-wayside-top")
-            }
-            if (block.bottomNeighbor == EMPTY) {
-                classes.add("road-block-wayside-bottom")
-            } else if (block.topNeighbor == EMPTY) {
-                classes.add("road-block-line-bottom")
-            }
+            if (block.topNeighbor == EMPTY) classes.add("road-block-wayside-top")
+            if (block.bottomNeighbor == EMPTY) classes.add("road-block-wayside-bottom")
+            else if (block.topNeighbor == EMPTY) classes.add("road-block-line-bottom")
         } else if (block.type == LEFT) {
-            if (block.bottomNeighbor == EMPTY) {
-                classes.add("road-block-wayside-bottom")
-            }
-            if (block.topNeighbor == EMPTY) {
-                classes.add("road-block-wayside-top")
-            } else if (block.bottomNeighbor == EMPTY) {
-                classes.add("road-block-line-top")
-            }
+            if (block.bottomNeighbor == EMPTY) classes.add("road-block-wayside-bottom")
+            if (block.topNeighbor == EMPTY) classes.add("road-block-wayside-top")
+            else if (block.bottomNeighbor == EMPTY) classes.add("road-block-line-top")
         } else if (block.type == UPLEFT || block.type == UPRIGHT || block.type == DOWNLEFT || block.type == DOWNRIGHT) {
-            if (block.isTopNeighborsEmpty) {
-                classes.add("road-block-wayside-top")
-            } else if (block.isBottomNeighborsEmpty) {
-                classes.add("road-block-wayside-bottom")
-            } else if (block.isLeftNeighborsEmpty) {
-                classes.add("road-block-wayside-left")
-            } else if (block.isRightNeighborsEmpty(false)) {
-                classes.add("road-block-wayside-right")
-            }
+            if (block.isTopNeighborsEmpty()) classes.add("road-block-wayside-top")
+            else if (block.isBottomNeighborsEmpty()) classes.add("road-block-wayside-bottom")
+            else if (block.isLeftNeighborsEmpty()) classes.add("road-block-wayside-left")
+            else if (block.isRightNeighborsEmpty()) classes.add("road-block-wayside-right")
         }
         return classes.joinToString(separator = " ")
     }

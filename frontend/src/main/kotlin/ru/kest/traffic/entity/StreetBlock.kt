@@ -16,12 +16,10 @@ class StreetBlock(val map: RoadMap, val x: Int, val y: Int) {
     val rightNeighbor : StreetBlockType = map.getRoadType(x + 1, y)
     val leftNeighbor : StreetBlockType = map.getRoadType(x - 1, y)
 
-    val isTopNeighborsEmpty = isAllEmpty(Pair(x - 1, y - 1), Pair(x, y - 1), Pair(x + 1, y - 1))
-    val isBottomNeighborsEmpty = isAllEmpty(Pair(x - 1, y + 1), Pair(x, y + 1), Pair(x + 1, y + 1))
-    val isLeftNeighborsEmpty = isAllEmpty(Pair(x - 1, y - 1), Pair(x - 1, y), Pair(x - 1, y + 1))
-//    val isRightNeighborsEmpty = isAllEmpty(Pair(x + 1, y - 1), Pair(x + 1, y), Pair(x + 1, y + 1))
-
-    fun isRightNeighborsEmpty(b: Boolean) = isAllEmpty(Pair(x + 1, y - 1), Pair(x + 1, y), Pair(x + 1, y + 1)) || b
+    fun isTopNeighborsEmpty() : Boolean = isAllEmpty(Pair(x - 1, y - 1), Pair(x, y - 1), Pair(x + 1, y - 1))
+    fun isBottomNeighborsEmpty() : Boolean = isAllEmpty(Pair(x - 1, y + 1), Pair(x, y + 1), Pair(x + 1, y + 1))
+    fun isLeftNeighborsEmpty() : Boolean = isAllEmpty(Pair(x - 1, y - 1), Pair(x - 1, y), Pair(x - 1, y + 1))
+    fun isRightNeighborsEmpty() : Boolean = isAllEmpty(Pair(x + 1, y - 1), Pair(x + 1, y), Pair(x + 1, y + 1))
 
     private fun isAllEmpty(vararg coords: Pair<Int, Int>) : Boolean {
         for (coord in coords) {
